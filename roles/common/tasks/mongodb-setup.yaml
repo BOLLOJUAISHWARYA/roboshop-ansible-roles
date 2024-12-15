@@ -10,12 +10,12 @@
 
 - name: get the entries count
   ansible.builtin.command:  mongo --host mongodb.roboshop.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-  register: entries_ count
+  register: entries_count
   when: component == "catalogue"
 
 - name: get the entries count
   ansible.builtin.command:  mongo --host mongodb.roboshop.store --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
-  register: entries_ count
+  register: entries_count
   when: component == "user"
 
 # - name: print the count
