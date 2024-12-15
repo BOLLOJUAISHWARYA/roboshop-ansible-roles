@@ -1,0 +1,28 @@
+- name: mongod repo
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: mongod installation
+  ansible.builtin.package:
+    name: mongodb-org-shell
+    state: present
+
+- name: get the entries count
+  ansible.builtin.command:  mongo --host mongodb.roboshop.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  register: entries_ count
+  when: component == "catalogue"
+
+- name: get the entries count
+  ansible.builtin.command:  mongo --host mongodb.roboshop.store --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  register: entries_ count
+  when: component == "user"
+
+# - name: print the count
+#   ansible.builtin.debug:
+#     msg: "product count: {{product_count}}"
+
+- name: load {{component}} data
+  ansible.builtin.command: mongo --host mongodb.roboshop.store < /app/schema/{{component}}.js
+  when: product_count.stdout == "0" # keep double quotes
+
