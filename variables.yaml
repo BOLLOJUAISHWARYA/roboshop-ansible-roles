@@ -5,6 +5,6 @@ RABBITMQ_HOST: rabbitmq.roboshop.store
 CATALOGUE_HOST: catalogue.roboshop.store
 USER_HOST: user.roboshop.store
 CART_HOST: cart.roboshop.store
-SHIPPING_HOST: shipping.roboshoop.store
+SHIPPING_HOST: shipping.roboshop.store
 PAYMENT_HOST: payment.roboshop.store
 DISPATCH_HOST: dispatch.roboshop.store
