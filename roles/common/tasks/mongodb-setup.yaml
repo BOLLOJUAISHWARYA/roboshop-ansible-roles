@@ -13,9 +13,9 @@
   register: products_count
   when: component == "catalogue"
 
-- name: print the count
-  ansible.builtin.debug:
-    msg: "product count: {{products_count}}"
+# - name: print the count
+#   ansible.builtin.debug:
+#     msg: "product count: {{products_count}}"
 
 - name: "load catalogue data"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
@@ -26,6 +26,10 @@
   ansible.builtin.shell:  mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: users_count
   when: component == "user"
+
+- name: print the count
+  ansible.builtin.debug:
+    msg: "user count: {{users_count}}"
 
 - name: "load user data"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
