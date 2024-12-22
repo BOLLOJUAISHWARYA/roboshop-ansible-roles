@@ -19,11 +19,11 @@
 
 - name: copy {{component}} related files
   ansible.builtin.get_url:
-    url:  https://roboshop-builds.s3.amazonaws.com/{{component}}.zip
+    url:  "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
     dest: /tmp
 
 - name: unzip
   ansible.builtin.unarchive:
-    src: /tmp/{{component}}.zip
+    src: "/tmp/{{component}}.zip"
     dest: /app
     remote_src: yes
